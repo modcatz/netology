@@ -9,9 +9,9 @@ from VK import VK
 print("Please follow this link to authorize: https://oauth.vk.com/authorize?client_id=51735575&scope=65536&response_type=token")
 
 # Getting data from user
-vk_id = input("Enter VK user_id: ")
-vk_token = input("Enter VK access_token: ")
-yadisk_token = input("Enter yadisk token: ")
+vk_id = input("Enter VK user_id: ").strip()
+vk_token = input("Enter VK access_token: ").strip()
+yadisk_token = input("Enter yadisk token: ").strip()
 
 # Defaults
 number_of_photos = 5
