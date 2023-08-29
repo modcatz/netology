@@ -2,6 +2,9 @@ import requests
 import yadisk
 from progress.bar import IncrementalBar
 import json
+from VK import VK
+
+
 
 print("Please follow this link to authorize: https://oauth.vk.com/authorize?client_id=51735575&scope=65536&response_type=token")
 
@@ -20,14 +23,12 @@ if not disk.is_dir(yadisk_folder_name):
     disk.mkdir(yadisk_folder_name)
 
 # Getting photo data from VK
-vk_url = f"https://api.vk.com/method/photos.get?owner_id={vk_id}&album_id=profile&extended=1&photo_sizes=1&v=5.131"
-header = {"Authorization": f'Bearer {vk_token}'}
-response = requests.get(vk_url, headers=header)
-photo_data = response.json()
+vk = VK(vk_token,vk_id)
+photo_data = vk.get_photos()
 
 # Checking if there's enough photos
-if len(photo_data["response"]["items"]) < number_of_photos:
-    number_of_photos = len(photo_data["response"]["items"])
+if len(photo_data) < number_of_photos:
+    number_of_photos = len(photo_data)
 
 # Photo upload section
 uploaded_photos = [] # uploads summary dict
@@ -39,17 +40,17 @@ for photo in range(number_of_photos):
     # Setting up photo details
 
     # Taking number of likes as name
-    photo_name = f'{photo_data["response"]["items"][photo]["likes"]["count"]}.jpg' 
+    photo_name = f'{photo_data[photo]["likes"]["count"]}.jpg' 
 
     # Taking the largest available size
-    photo_url = photo_data["response"]["items"][photo]["sizes"][-1]["url"]
+    photo_url = photo_data[photo]["sizes"][-1]["url"]
 
     # Saving size name for summary
-    photo_size = photo_data["response"]["items"][photo]["sizes"][-1]["type"]
+    photo_size = photo_data[photo]["sizes"][-1]["type"]
 
     # If the number of likes matched -> adding upload date to the name 
     if not filter(lambda d: d['file_name'] in photo_name, uploaded_photos):
-        photo_name = f'{photo_name}-{photo_data["response"]["items"][photo]["date"]}.jpg'
+        photo_name = f'{photo_name}-{photo_data[photo]["date"]}.jpg'
     
     # Downloading the photo
     photo = requests.get(photo_url)
