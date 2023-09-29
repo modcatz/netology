@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS albums (
 CREATE TABLE IF NOT EXISTS tracks (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) UNIQUE NOT NULL,
-    duration VARCHAR(20),
+    duration INT,
     album_id INT NOT NULL,
     CONSTRAINT fk_album FOREIGN KEY(album_id) REFERENCES albums(id)
 );
