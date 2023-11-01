@@ -5,4 +5,4 @@ from application.salary import calculate_salary
 if __name__ == '__main__':
     get_employees()
     calculate_salary()
-    print(datetime.today())
+    print("Right now it is: ", datetime.today())
