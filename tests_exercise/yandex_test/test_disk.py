@@ -7,7 +7,7 @@ folder="test_folder"
 base_url="https://cloud-api.yandex.net/v1/disk/resources?path="
 
 @pytest.fixture
-def output(oauth_token,folder_name):
+def create_folder(oauth_token,folder_name):
     headers = {"Authorization": f"OAuth {oauth_token}"}
     reply = r.put(f"{base_url}{folder_name}", headers=headers)
     print(reply.json())
@@ -15,13 +15,13 @@ def output(oauth_token,folder_name):
     cleanup = r.delete(f"{base_url}{folder}", headers=headers)
 
 @pytest.mark.parametrize("oauth_token,folder_name",[(access_token,folder)])
-def test_success_status_code(output):
+def test_success_status_code(create_folder):
     '''Checks if folder is created succesfully'''
 
-    assert output.status_code == 201
+    assert create_folder.status_code == 201
 
 @pytest.mark.parametrize("oauth_token,folder_name",[(access_token,folder)])
-def test_folder_exists(output):
+def test_folder_exists(create_folder):
     '''Checks if folder exists after creation'''
  
     headers = {"Authorization": f"OAuth {access_token}"}
@@ -30,14 +30,14 @@ def test_folder_exists(output):
     assert reply.status_code == 200
 
 @pytest.mark.parametrize("oauth_token,folder_name",[(access_token,"")])
-def test_wrong_name(output):
+def test_wrong_name(create_folder):
     '''Checks error for empty folder name'''
 
-    assert output.status_code == 400
+    assert create_folder.status_code == 400
 
 @pytest.mark.parametrize("oauth_token,folder_name",[("blabla",folder)])
-def test_wrong_creds(output):
+def test_wrong_creds(create_folder):
     '''Checks error for wrong token'''
 
-    assert output.status_code == 401
+    assert create_folder.status_code == 401
 
