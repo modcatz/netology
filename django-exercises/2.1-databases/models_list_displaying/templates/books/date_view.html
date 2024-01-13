@@ -1,0 +1,13 @@
+{% extends "books/books_list.html" %}
+
+{% block pagination%}
+<div class="container">
+
+{% if previous_date %}
+<p><a class="button button-primary" href="{% url 'book' previous_date %}"> < {{ previous_date }}</a>&nbsp;&nbsp;&nbsp;
+{% endif %}
+{% if next_date %}
+<a class="button button-primary" href="{% url 'book' next_date %}"> {{ next_date }} ></a>
+{% endif %}
+</div>
+{% endblock %}

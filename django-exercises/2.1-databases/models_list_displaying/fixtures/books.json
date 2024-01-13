@@ -1,0 +1,47 @@
+[
+  {
+    "model": "books.book",
+    "pk": 1,
+    "fields": {
+      "name": "Война и мир",
+      "author": "Ф.Д. Достоевский",
+      "pub_date": "2018-02-27"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 2,
+    "fields": {
+      "name": "1984",
+      "author": "Джордж Оруэл",
+      "pub_date": "2016-12-06"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 3,
+    "fields": {
+      "name": "Вино из одуванчиков",
+      "author": "Рей Бредберри",
+      "pub_date": "2012-11-16"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 4,
+    "fields": {
+      "name": "Благие знамения",
+      "author": "Терри Пратчетт",
+      "pub_date": "2017-08-12"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 5,
+    "fields": {
+      "name": "50 оттенков серого",
+      "author": "Э.Л. Джеймс",
+      "pub_date": "2016-12-06"
+    }
+  }
+]
